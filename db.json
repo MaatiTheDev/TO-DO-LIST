@@ -1,27 +1,27 @@
 {
   "tasks": [
     {
-      "id": 1,
+      "id": "1",
       "text": "Do web check-in",
       "completed": false
     },
     {
-      "id": 2,
+      "id": "2",
       "text": "Read a book",
       "completed": true
     },
     {
-      "id": 3,
+      "id": "3",
       "text": "Workout",
       "completed": false
     },
     {
-      "id": 4,
+      "id": "4",
       "text": "Do web check-in",
       "completed": false
     },
     {
-      "id": 5,
+      "id": "5",
       "text": "Pay bills",
       "completed": true
     },
@@ -34,6 +34,11 @@
       "id": "1bac",
       "text": "Read trade market",
       "completed": true
+    },
+    {
+      "id": "a2ff",
+      "text": "go for refreshments",
+      "completed": false
     }
   ]
 }

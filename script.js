@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
             tasks.forEach(task => {
                 addTask(task.text, task.completed, task.id);
             });
-        });
+        })
+        .catch(error => console.error('Error fetching tasks:', error));
 
     addTaskBtn.addEventListener('click', () => {
         const taskText = taskInput.value.trim();
@@ -35,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         li.addEventListener('click', () => {
             li.classList.toggle('completed');
-            updateTaskStatus(li.textContent, li.classList.contains('completed'), id);
+            updateTaskStatus(id, li.classList.contains('completed'));
         });
 
         const deleteBtn = document.createElement('button');
@@ -62,22 +63,25 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(task => {
             addTask(task.text, task.completed, task.id);
-        });
+        })
+        .catch(error => console.error('Error saving task:', error));
     }
 
     function removeTask(id) {
         fetch(`http://localhost:3000/tasks/${id}`, {
             method: 'DELETE'
-        });
+        })
+        .catch(error => console.error('Error deleting task:', error));
     }
 
-    function updateTaskStatus(text, completed, id) {
+    function updateTaskStatus(id, completed) {
         fetch(`http://localhost:3000/tasks/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ completed })
-        });
+        })
+        .catch(error => console.error('Error updating task status:', error));
     }
 });
