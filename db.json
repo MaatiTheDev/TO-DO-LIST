@@ -38,7 +38,12 @@
     {
       "id": "a2ff",
       "text": "go for refreshments",
-      "completed": false
+      "completed": true
+    },
+    {
+      "id": "6182",
+      "text": "swiming",
+      "completed": true
     }
   ]
 }
