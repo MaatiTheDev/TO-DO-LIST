@@ -1,0 +1,39 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "text": "Do web check-in",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "text": "Read a book",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "text": "Workout",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "text": "Do web check-in",
+      "completed": false
+    },
+    {
+      "id": 5,
+      "text": "Pay bills",
+      "completed": true
+    },
+    {
+      "id": "4f39",
+      "text": "Rrecharge bank credit",
+      "completed": false
+    },
+    {
+      "id": "1bac",
+      "text": "Read trade market",
+      "completed": true
+    }
+  ]
+}
