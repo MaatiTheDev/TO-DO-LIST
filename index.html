@@ -1,33 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do List App</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script>
-      window.location.href = "login.html";
-    </script>
-  </head>
-  <body></body>
-</html>
-
-<!-- <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List App</title>
+    <title>Login</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="tasks.html">Tasks</a></li>
-            <li><a href="account.html">Account</a></li>
-            <li><a href="login.html" id="logout">Log Out</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <label for="login-username">Username:</label>
+            <input type="text" id="login-username" required>
+            <br>
+            <label for="login-password">Password:</label>
+            <input type="password" id="login-password" required>
+            <br>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+    </div>
     <script src="index.js"></script>
 </body>
-</html> -->
+</html>

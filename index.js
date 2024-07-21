@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (document.getElementById('task-form')) {
         document.getElementById('task-form').addEventListener('submit', addTask);
+    }
+
+    if (document.getElementById('task-list')) {
         loadTasks();
     }
 
@@ -24,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
-        
+
         fetch(`${apiUrl}/users`)
             .then(response => response.json())
             .then(users => {
@@ -57,9 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(newUser)
             })
-            .then(() => {
+            .then(response => response.json())
+            .then(user => {
+                console.log('User created:', user);
                 alert('Sign up successful');
-                window.location.href = 'login.html';
+                window.location.href = 'index.html';
+            })
+            .catch(error => {
+                console.error('Error creating user:', error);
+                alert('Error signing up');
             });
         };
         reader.readAsDataURL(avatar);
@@ -78,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const updatedUser = {
                 ...loggedInUser,
+                username: username || loggedInUser.username,
                 password: password || loggedInUser.password,
                 avatarUrl: avatarUrl || loggedInUser.avatarUrl
             };
@@ -92,6 +102,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(() => {
                 localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
                 alert('Account updated successfully');
+            })
+            .catch(error => {
+                console.error('Error updating account:', error);
+                alert('Error updating account');
             });
         };
         reader.readAsDataURL(avatar);
@@ -131,6 +145,11 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(() => {
                 loadTasks();
                 document.getElementById('task-form').reset();
+                window.location.href = 'tasks.html';
+            })
+            .catch(error => {
+                console.error('Error adding task:', error);
+                alert('Error adding task');
             });
         };
         reader.readAsDataURL(image);
@@ -142,6 +161,10 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(tasks => {
                 const taskList = document.getElementById('task-list');
                 taskList.innerHTML = '';
+                let nonDoneCount = 0;
+                let doneCount = 0;
+                let scheduledCount = 0;
+
                 tasks.forEach(task => {
                     const taskItem = document.createElement('div');
                     taskItem.innerHTML = `
@@ -152,8 +175,25 @@ document.addEventListener('DOMContentLoaded', function() {
                         <button onclick="deleteTask(${task.id})">Delete</button>
                     `;
                     taskList.appendChild(taskItem);
+
+                    if (task.done) {
+                        doneCount++;
+                    } else {
+                        nonDoneCount++;
+                    }
                 });
+
+                document.getElementById('non-done-tasks').innerText = nonDoneCount;
+                document.getElementById('done-tasks').innerText = doneCount;
+                document.getElementById('scheduled-tasks').innerText = scheduledCount;
+            })
+            .catch(error => {
+                console.error('Error loading tasks:', error);
             });
+    }
+
+    window.logout = function() {
+        localStorage.removeItem('loggedInUser');
     }
 
     window.markTaskAsDone = function(taskId) {
@@ -171,8 +211,11 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(() => {
                 loadTasks();
+            })
+            .catch(error => {
+                console.error('Error marking task as done:', error);
             });
-    };
+    }
 
     window.deleteTask = function(taskId) {
         fetch(`${apiUrl}/tasks/${taskId}`, {
@@ -180,6 +223,9 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(() => {
             loadTasks();
+        })
+        .catch(error => {
+            console.error('Error deleting task:', error);
         });
-    };
+    }
 });
